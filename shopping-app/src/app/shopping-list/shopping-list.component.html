@@ -1,0 +1,50 @@
+
+<div class="container">
+<form (ngSubmit)="save() && product.valid" #form="ngForm">
+  <div class="form-group" style="margin-top: 20px">
+    <input type="text" class="form-control"
+           id="product"
+           placeholder="Wpisz nazwę produktu" [(ngModel)]="list.product" name="product"
+           required="true"
+           #product="ngModel" autofocus>
+  </div>
+  <div style="color:red" *ngIf="form.submitted && product.invalid && valid">
+    <p>Prosze podac nazwe</p>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Dodaj produkt</button>
+  <button *ngIf="lists.length!==0" data-toggle="modal" data-target="#myModal" type="button" class="btn" style="float: right; background-color: bisque">Zarchiwizuj</button>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Archiwizacja</h4>
+        </div>
+        <div class="modal-body">
+          <label for="price">Cena: </label>
+          <input required id="price" [(ngModel)]="price" name="price">
+        </div>
+        <div class="modal-footer">
+          <button  type="button" class="btn btn-default" data-dismiss="modal" (click)="archieve()" >Zarchiwizuj</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</form>
+
+<div style="margin-top: 20px">
+<ng-container *ngFor="let list of lists">
+  <app-product [product]="list" (emitter)="delete(list)" (emitterUpdate)="update($event)"></app-product>
+</ng-container>
+
+</div>
+</div>
+
+

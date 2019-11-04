@@ -1,0 +1,13 @@
+<div class="container" style="margin-top: 20px">
+  <input type="search" [(ngModel)]="text" id="search" class="form-control" placeholder="Szukaj..." style="margin-bottom: 20px">
+  <div class="card" *ngFor="let archive of archieves | archiveFilter:text">
+    <div class="card-body">
+      <span>Data: {{archive.date | date}}</span>
+      <span style="float: right">{{archive.price}}zł</span>
+      <ng-container *ngFor="let product of archive.product">
+        <div style="color: blue">{{product}},</div>
+      </ng-container>
+    </div>
+  </div>
+
+</div>
